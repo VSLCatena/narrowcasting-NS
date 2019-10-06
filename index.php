@@ -169,9 +169,9 @@
 	</div>
 </div>
 <div class="row">
-	<div id="buienradar">
+	<canvas id="buienradar" width="453" height="120">
 	
-	</div>
+	</canvas>
 </div>
 
 <script type="text/javascript">
