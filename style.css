@@ -1,0 +1,50 @@
+.Otext-black {
+	color:black!important;
+}
+.li-nobullet {
+	list-style: none;
+}
+
+#departures td {
+	padding: 0.25rem;
+	font-size:2.75rem;
+	
+}
+.fontparty {
+	font-family:Comic Sans MS, cursive, sans-serif;
+}
+
+.rcorner {
+  border-radius: 5px 5px 5px 5px ;
+}
+.rcorner-l {
+  border-radius: 0px 5px 5px 0px;
+}
+.rcorner-r {
+  border-radius: 5px 0px 0px 5px;
+}
+.rcorner-t {
+  border-radius: 0px 0px 5px 5px;
+}
+.rcorner-b {
+  border-radius: 5px 5px 0px 0px;
+}
+
+.background-day {
+	background-image: url(background-day.jpg);
+	background-size: cover;
+	background-repeat:no-repeat;
+}
+.background-night {
+	background-image: url(background-night.jpg);
+	background-size: cover;
+	background-repeat:no-repeat;
+}  
+.bg-darkblue {
+	background-color: #000468!important
+	
+}
+
+.bg-nsyellow {
+	background-color: #f2c400!important
+}
