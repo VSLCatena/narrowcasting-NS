@@ -24,7 +24,7 @@
 		De trein met vertrektijden is iets vertraagd...
 	</div>
 
-	<div id="container" class="container h2" style="display:none; min-width:90%" >
+	<div id="container" class="container h2" style="display:none; min-width:90%; max-height:80%;" >
 
 		<div class="row bg-white rcorner">
 			<div class="col-1"><img src="ns_logo.png" alt="NS Logo" height="24" style="padding:5px"></img></div>
@@ -58,31 +58,32 @@
 			<div class="col-sm-8 offset-sm-1">
 				<div class="row ">
 					<div class="col-12 ">
-					 <div id="table"  class="table rcorner" >
-						<table id="departures" class="table table-striped table-light" >
-							<thead class="bg-nsyellow Otext-black">
-							<tr>
-								<th>Vertrek (vertraging)</th>
-								<th>Bestemming</th>
-								<th>Spoor</th>
-								<th>Type</th>
-							</tr>
-							</thead>
-							<tbody id="dept_body" class="">
-							<tr id="0">
-								<td id="0-time" class="dept-time"></td>
-								<td id="0-dest" class="dept-dest"></td>
-								<td id="0-track" class="dept-track"></td>
-								<td id="0-extra" class="dept-extra"></td>
-							</tr>
-							</tbody>
-						</table>
+						<div id="table"  class="table rcorner" >
+							<table id="departures" class="table table-striped table-light" >
+								<thead class="bg-nsyellow Otext-black">
+								<tr>
+									<th>Vertrek (vertraging)</th>
+									<th>Bestemming</th>
+									<th>Spoor</th>
+									<th>Type</th>
+								</tr>
+								</thead>
+								<tbody id="dept_body" class="">
+								<tr id="0">
+									<td id="0-time" class="dept-time"></td>
+									<td id="0-dest" class="dept-dest"></td>
+									<td id="0-track" class="dept-track"></td>
+									<td id="0-extra" class="dept-extra"></td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="row">
+    <div class="">
 		<canvas id="buienradar" width="453" height="120">
 		
 		</canvas>
