@@ -58,6 +58,7 @@ window.onload = function(){
 					+"<td id='"+ i +"-dest' class='dept-dest'></td>"
 					+"<td id='"+ i +"-track' class='dept-track'></td>"
 					+"<td id='"+ i +"-extra' class='dept-extra'></td>"
+					+"<td id='"+ i +"-walk' class='dept-walk'></td>"
 					+"";
 					$('#'+i).html(newRowData);
 					
@@ -68,6 +69,7 @@ window.onload = function(){
 					var dest = document.getElementById(i+"-dest");
 					var track = document.getElementById(i+"-track");
 					var extra = document.getElementById(i+"-extra");
+					var walk = document.getElementById(i+"-walk");
 					
 					var vertraging =  moment(value.actualDateTime).diff(moment(value.plannedDateTime),"minutes")
 					
@@ -76,6 +78,7 @@ window.onload = function(){
 					dest.innerHTML = value.direction
 					track.innerHTML = value.plannedTrack
 					extra.innerHTML = value.product.categoryCode
+					walk.innerHTML = moment(moment(value.actualDateTime).subtract(20,"minutes")).format("HH:mm")
 					
 					var reachPlusMax = moment(value.actualDateTime).isBefore(timePlusMax)
 					//console.log(vertraging)
