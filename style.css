@@ -48,3 +48,8 @@
 .bg-nsyellow {
 	background-color: #f2c400!important
 }
+
+footer {
+  position: absolute;
+  bottom: 0;
+}
