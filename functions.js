@@ -170,5 +170,16 @@ window.onload = function(){
 
 		
 	});
+	var feed = "feed.php";
+	newsarray = [];
+	$.get(feed, function (data) {
+		$(data).find("item").each(function () { // or "item" or whatever suits your feed
+			var el = $(this);
+			newsarray.push(el.find("title").text());
 
-};
+		});
+	});
+	var divfeed = document.getElementById("feed");
+	divfeed.innerHTML = newsarray;
+	console.log(newsarray);
+}

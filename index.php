@@ -90,6 +90,11 @@
 		
 		</canvas>
 	</div>
+	<div class="row footer">
+		<div class="col-12 bg-white">
+			<div class="feed text-black" id="feed"></div>
+		</div>
+	</div>
 
 
 </body>
