@@ -21,6 +21,22 @@ window.onload = function(){
 	
 	console.log("Night:"+night)
 
+
+		/**
+	 * Randomize array element order in-place.
+	 * Using Durstenfeld shuffle algorithm.
+	 */
+	function shuffleArray(array) {
+		for (var i = array.length - 1; i > 0; i--) {
+			var j = Math.floor(Math.random() * (i + 1));
+			var temp = array[i];
+			array[i] = array[j];
+			array[j] = temp;
+		}
+		return array
+	}
+
+	
 	//get NS-data departures
 	$(function() {
 		var params = {
@@ -51,7 +67,7 @@ window.onload = function(){
 					//console.log(value,key);
 					//console.log(moment(value.actualDateTime))
 					if(moment(value.actualDateTime).isBefore(timePlusMin)) return;
-					console.log(i);
+					//console.log(i);
 					
 					var newRowData = ""
 					+"<td id='"+ i +"-time' class='dept-time'></td>"
@@ -80,11 +96,12 @@ window.onload = function(){
 					extra.innerHTML = value.product.categoryCode
 					walk.innerHTML = moment(moment(value.actualDateTime).subtract(20,"minutes")).format("HH:mm")
 					
-					var reachPlusMax = moment(value.actualDateTime).isBefore(timePlusMax)
+					//var reachPlusMax = moment(value.actualDateTime).isBefore(timePlusMax)
 					//console.log(vertraging)
 					i =  i + 1
 					
-					if(reachPlusMax = false || i > 8){ loop.stop = true; }
+					//if(reachPlusMax = false || i > 8){ loop.stop = true; }
+					if(i > 8){ loop.stop = true; }
 				
 			});
 		
@@ -94,11 +111,15 @@ window.onload = function(){
 			$("#background").removeClass('bg-dark').addClass('background-night');
 			$("table").removeClass('table-light').addClass('table-dark');
 			$("thead").removeClass('text-light').addClass('text-dark');
+			$("#feedbase").removeClass('bg-light').addClass('bg-dark');
+			$("#feed").removeClass('text-dark').addClass('text-light');
 			}
 		else {
 			$("#background").removeClass('bg-dark').addClass('background-day');
 			$("table").removeClass('table-dark').addClass('table-light');
 			$("thead").removeClass('text-dark').addClass('text-light');
+			$("#feedbase").removeClass('bg-dark').addClass('bg-light');
+			$("#feed").removeClass('text-light').addClass('text-dark');
 			}
 			
 
@@ -117,7 +138,7 @@ window.onload = function(){
 		
 		
 		//end show the data
-		$("#container").show();		
+		$("#container").show();				
 		$("#loading").hide();
 		
 		
@@ -155,9 +176,7 @@ window.onload = function(){
 				delays.appendChild(ul)
 			
 				$("#delays ul:nth-last-child(1)").append('<li><b>'+value.titel+'</b></li><li class="li-nobullet">'+value.verstoring.oorzaak+'</li><li class="li-nobullet">'+value.verstoring.verwachting+'</li>');
-				console.log(value.titel)
-				console.log(value.verstoring.oorzaak)
-				console.log(value.verstoring.verwachting)			
+				console.log(value)			
 			})
 			
 			
@@ -171,15 +190,24 @@ window.onload = function(){
 		
 	});
 	var feed = "feed.php";
-	newsarray = [];
+	var divfeed = document.getElementById("feed");
+	var newsarray = [];
 	$.get(feed, function (data) {
 		$(data).find("item").each(function () { // or "item" or whatever suits your feed
 			var el = $(this);
+			//console.log(el);
 			newsarray.push(el.find("title").text());
 
 		});
+		newsarray = shuffleArray(newsarray);
+		var newsstring = newsarray.join("  |  ");
+		divfeed.innerHTML = newsstring; //newsarray
+		//console.log(newsarray);
+		//console.log(newsstring);
+
 	});
-	var divfeed = document.getElementById("feed");
-	divfeed.innerHTML = newsarray;
-	console.log(newsarray);
+
+
+
+	
 }
