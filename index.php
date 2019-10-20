@@ -84,18 +84,18 @@
 				</div>
 			</div>
 		</div>
-	</div>
-    <div class="">
-		<canvas id="buienradar" width="453" height="120">
-		
-		</canvas>
-	</div>
-	<div class="row footer">
-		<div class="col-12 bg-white">
-			<div class="feed text-black" id="feed"></div>
+	
+		<div class="row" id="buienradar" >
+			<canvas id="buienradar" width="453" height="120">
+			
+			</canvas>
 		</div>
-	</div>
-
+		<div class="row footer" id="footer" >
+			<div class="col-12 bg-light feedbase" id="feedbase">
+				<div class="feed text-dark" id="feed"></div>
+			</div>
+		</div>
+</div>
 
 </body>
 	<script src="./functions.js"></script>
