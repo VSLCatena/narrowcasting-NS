@@ -24,78 +24,80 @@
 		De trein met vertrektijden is iets vertraagd...
 	</div>
 
-	<div id="container" class="container h2" style="display:none; min-width:90%; max-height:80%;" >
-
-		<div class="row bg-white rcorner">
-			<div class="col-1"><img src="ns_logo.png" alt="NS Logo" height="24" style="padding:5px"></img></div>
-			<div class="col-sm-2">Vertrektijden</div>
-			<div class="col-sm-9">Leiden Centraal</div>
-		</div>
-		<div class="row bg-darkblue rcorner" style="display:none">
-			<div class="col-2 h5 text-white ">Tijd</div>
-			<div class="col-10 h5 text-white ">Plan uw reis</div>
-		</div>
-		<div class="row">&nbsp;</div>
-		<div class="row">   
-			<div class="col-sm-3">
-				<div class="row bg-darkblue rcorner">
-					<div class="col-4"><i class="far fa-clock text-white"></i></div>				
-					<div class="col-8"><div id="clock" class="text-white"></div></div>
+	<div id="container" class="container h2"  >
+		<div class="row" id="vertrektijdenbase">
+			<div  class="col-12">
+				<div class="row bg-white rcorner" id="title">
+					<div class="col-1"><img src="ns_logo.png" alt="NS Logo" height="24" style="padding:5px"></img></div>
+					<div class="offset-1 col-2">Vertrektijden</div>
+					<div class="col-sm-8">Leiden Centraal</div>
+				</div>
+				<div class="row bg-darkblue rcorner" >
+					<div>&nbsp;</div>
 				</div>
 				<div class="row">&nbsp;</div>
-				<div class="row rcorner-b bg-nsyellow ">
-					<div class="col-3 "><i class="fas fa-exclamation-triangle"></i></div>
-					<div class="col-9 ">
-						<div id="title_delays" class="small">NS Wijzigingen en storingen</div>
+				<div class="row" >   
+					<div class="col-sm-3">
+						<div class="row bg-darkblue rcorner" id="clockbase">
+							<div class="col-4"><i class="far fa-clock text-white"></i></div>				
+							<div class="col-8"><div id="clock" class="text-white"></div></div>
+						</div>
+						<div class="row">&nbsp;</div>
+						<div class="row rcorner-b bg-nsyellow " id="title_delays">
+							<div class="col-3 "><i class="fas fa-exclamation-triangle"></i></div>
+							<div class="col-9 ">
+								<div  class="small">NS Wijzigingen en storingen</div>
+							</div>
+						</div>
+						<div class="row rcorner-t bg-white">
+							<div class="col-12 " >
+								<div id="delays" class=""></div>
+							</div>
+						</div>			
 					</div>
-				</div>
-				<div class="row rcorner-t bg-white">
-					<div class="col-12 " style="min-height:300px">
-						<div id="delays" class=""></div>
-					</div>
-				</div>			
-			</div>
-			<div class="col-sm-8 offset-sm-1">
-				<div class="row ">
-					<div class="col-12 ">
-						<div id="table"  class="table rcorner" >
-							<table id="departures" class="table table-striped table-light" >
-								<thead class="bg-nsyellow Otext-black">
-								<tr>
-									<th>Vertrek (vertraging)</th>
-									<th>Bestemming</th>
-									<th>Spoor</th>
-									<th>Type</th>
-									<th>Ga lopen om</th>
-								</tr>
-								</thead>
-								<tbody id="dept_body" class="">
-								<tr id="0">
-									<td id="0-time" class="dept-time"></td>
-									<td id="0-dest" class="dept-dest"></td>
-									<td id="0-track" class="dept-track"></td>
-									<td id="0-extra" class="dept-extra"></td>
-									<td id="0-walk" class="dept-walk"></td>
-								</tr>
-								</tbody>
-							</table>
+					<div class="col-sm-9">
+						<div class="row ">
+							<div class="col-12 ">
+								<div id="table"  class="table rcorner" >
+									<table id="departures" class="table table-striped table-light" >
+										<thead class="bg-nsyellow Otext-black">
+										<tr>
+											<th>Vertrek</th>
+											<th>Bestemming</th>
+											<th>Spoor</th>
+											<th>Type</th>
+											<th>Lopen</th>
+										</tr>
+										</thead>
+										<tbody id="dept_body" class="">
+										<tr id="0">
+											<td id="0-time" class="dept-time"></td>
+											<td id="0-dest" class="dept-dest"></td>
+											<td id="0-track" class="dept-track"></td>
+											<td id="0-extra" class="dept-extra"></td>
+											<td id="0-walk" class="dept-walk"></td>
+										</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	
-		<div class="row" id="buienradar" >
-			<canvas id="buienradar" width="453" height="120">
-			
-			</canvas>
+		<div class="row bg-dark" id="buienradarbase " >
+			<div class="col-xs-12 rcorner">
+				<canvas id="buienradar"  style="padding:20px;">
+				</canvas>
+			</div>
 		</div>
-		<div class="row footer" id="footer" >
+		<div class="row footer" id="footerbase" >
 			<div class="col-12 bg-light feedbase" id="feedbase">
 				<div class="feed text-dark" id="feed"></div>
 			</div>
 		</div>
-</div>
+	</div>
 
 </body>
 	<script src="./functions.js"></script>

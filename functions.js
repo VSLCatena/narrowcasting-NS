@@ -1,12 +1,8 @@
 window.onload = function(){
 	
      
-
-
-
-	
 	var clock = document.getElementById("clock");
-
+	var url = 1;
 
 	var format = 'HH:mm:ss'
 	var dateTimeNow = moment().format(); //default  
@@ -33,7 +29,7 @@ window.onload = function(){
 			array[i] = array[j];
 			array[j] = temp;
 		}
-		return array
+		return array;
 	}
 
 	
@@ -106,6 +102,7 @@ window.onload = function(){
 			});
 		
 		//end of successful script
+		
 		//day/night script
 		if(night){
 			$("#background").removeClass('bg-dark').addClass('background-night');
@@ -134,10 +131,12 @@ window.onload = function(){
 		}
 		if(Math.floor(Math.random()*10) <=2){
 			activate();
+			console.log("fontparty")
+			
 		}
 		
 		
-		//end show the data
+		// show the data
 		$("#container").show();				
 		$("#loading").hide();
 		
@@ -146,6 +145,11 @@ window.onload = function(){
 		.fail(function() {
 			//alert("error");
 			console.log("Error");
+			// show the data
+			$("#container").show();				
+			$("#loading").hide();
+		
+			
 		});
 		
 
@@ -189,7 +193,11 @@ window.onload = function(){
 
 		
 	});
-	var feed = "feed.php";
+	if(Math.floor(Math.random()*10) <=1){
+		url = 2
+		console.log("humor")
+	}
+	var feed = "feed.php?url="+url;
 	var divfeed = document.getElementById("feed");
 	var newsarray = [];
 	$.get(feed, function (data) {
@@ -207,6 +215,172 @@ window.onload = function(){
 
 	});
 
+	//BUIENRADAR <3 Tnx Thomas
+     function request() {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() { 
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                doDraw(xmlHttp.responseText);
+        }
+        xmlHttp.open("GET", "https://graphdata.buienradar.nl/forecast/json/?lat=52.156178&lon=4.485454", true); // true for asynchronous 
+        xmlHttp.send(null);
+		console.log("send BR request");
+    }
+
+    function doDraw(text) {
+        let data = JSON.parse(text);
+        console.debug(data);
+
+        var canvas = document.getElementById("buienradar");
+        var ctx = canvas.getContext("2d");
+		ctx.canvas.width  = window.innerWidth*0.85;
+		ctx.canvas.height = window.innerHeight*0.2;
+		
+		ctx.canvas.graphStart = canvas.height*0.1;
+		ctx.canvas.graphEnd = canvas.height*0.85;
+		
+		console.log("canvas.width:"+canvas.width)
+		console.log("canvas.height:"+canvas.height)
+		
+		ctx.font = "2.5vw Arial";
+        ctx.fillStyle = data.color;
+        ctx.save();
+        ctx.translate(0, -20);
+        drawGraph(canvas, ctx, data.forecasts);
+        ctx.restore();
+    }
+
+    function drawGraph(canvas, ctx, forecasts) {
+        const partSize = canvas.width / (Math.floor(forecasts.length / 2) * 2);
+        // Save the state so we don't screw up later
+        ctx.save();
+        // Translate and scale so we can draw with the bottom-left being the origin
+        ctx.translate(0, canvas.height);
+        ctx.scale(1, -1);
+
+        //We start at 0,0
+        ctx.beginPath();
+        ctx.moveTo(0, canvas.graphStart);
+
+        // And then for each line we move to the corresponding value
+        var x = 0;
+        forecasts.forEach(function(item) {
+            //console.log(item.value/100);
+			ctx.lineTo(x++ * partSize, item.value/100*(canvas.graphEnd-canvas.graphStart)+canvas.graphStart);
+        });
+        // Then we make a line to the start and fill it
+        ctx.lineTo((x-1) * partSize, canvas.graphStart);
+        ctx.fill();
+
+        const verticals = forecasts.length/2;
+        // Vertical lines
+        for(var i = 1; i < verticals; i++) {
+            // Every non%3 line we want dim
+            if (i % 3 != 0) {
+                ctx.strokeStyle = "#e7e7e7"
+            } else {
+                ctx.strokeStyle = "#c4c4c4"
+            }
+
+            ctx.beginPath();
+            ctx.moveTo(i * partSize * 2, canvas.graphStart);
+            ctx.lineTo(i * partSize * 2, canvas.graphEnd);
+            ctx.stroke();
+        }
+
+        ctx.strokeStyle = "#c4c4c4";
+
+        // Horizontal lines
+        ctx.beginPath();
+        ctx.moveTo(0, 0.4*(canvas.graphEnd-canvas.graphStart)+canvas.graphStart);
+        ctx.lineTo(canvas.width, 0.4*(canvas.graphEnd-canvas.graphStart)+canvas.graphStart);
+        ctx.moveTo(0, 0.7*(canvas.graphEnd-canvas.graphStart)+canvas.graphStart);
+        ctx.lineTo(canvas.width, 0.7*(canvas.graphEnd-canvas.graphStart)+canvas.graphStart);
+        ctx.stroke();
+
+        // Border around the field
+        ctx.beginPath();
+        ctx.lineTo(0, canvas.graphStart);
+        ctx.lineTo(0, canvas.graphEnd);
+        ctx.lineTo(canvas.width, canvas.graphEnd);
+        ctx.lineTo(canvas.width, canvas.graphStart);
+        ctx.lineTo(0, canvas.graphStart);
+        ctx.stroke();
+
+        // Draw the time text
+        drawTimeText(canvas, ctx, forecasts, partSize);
+
+        // Draw the light, heavy text
+        drawLightHeavyText(canvas, ctx);
+
+        // And restore the state
+        ctx.restore();
+    }
+
+    function drawTimeText(canvas, ctx, forecasts, partSize) {
+        ctx.save();
+        // We position ourselves
+        ctx.translate(0, -0.8*canvas.graphStart);
+
+        ctx.textAlign = "left";
+        drawText(ctx, "Nu", 10)
+
+        ctx.textAlign = "center";
+        for (var i = 1; i < forecasts.length/6-1; i++) {
+            // We set all the times at the bottom except the last one
+            drawText(ctx, timeFromString(forecasts[i * 6].datetime), partSize * i * 6);
+        }
+
+        // If the last one is a %3 then we want to align the text to the right of the border
+        if (Math.floor(forecasts.length/2)%3 == 0) {
+            ctx.textAlign = "right";
+            drawText(ctx, timeFromString(forecasts[forecasts.length-1].datetime), canvas.width);
+        } else {
+            // Otherwise we want to center it under the last vertical lign
+            ctx.textAlign = "center";
+            drawText(ctx, timeFromString(forecasts[Math.floor(forecasts.length/6)*6].datetime), partSize * 6 * Math.floor(forecasts.length/6));
+        }
+
+        ctx.restore();
+    }
+
+    function drawLightHeavyText(canvas, ctx) {
+        ctx.save();
+		ctx.translate(0,0);
+        ctx.translate(canvas.width*0.995, 0.05*(canvas.graphEnd-canvas.graphStart)+canvas.graphStart);
+        ctx.textAlign = "right";
+        ctx.shadowBlur=7;
+
+        // Here we draw light and heavy
+        drawText(ctx, "Licht", 0);
+        ctx.translate(0, 0.55*(canvas.graphEnd-canvas.graphStart)+canvas.graphStart);
+        drawText(ctx, "Zwaar", 0);
+
+        ctx.shadowBlur=0;
+        ctx.restore();
+    }
+
+    function drawText(ctx, text, x) {
+        ctx.save();
+        ctx.translate(x, 0);
+        ctx.scale(1, -1);
+        ctx.fillStyle = "white";
+        ctx.fillText(text, 0, 0);
+        ctx.restore();
+    }
+
+    function timeFromString(text) {
+        let date = new Date(text);
+        return date.getHours().pad()+":"+date.getMinutes().pad();
+    }
+
+    Number.prototype.pad = function(size) {
+        var s = String(this);
+        while (s.length < (size || 2)) {s = "0" + s;}
+        return s;
+    }
+
+    request();
 
 
 	
