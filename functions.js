@@ -1,5 +1,9 @@
-window.onload = function(){
-	
+$(window).ready(function() {
+	var debug = false;
+	var msgdetail="";
+	var msg = document.getElementById("msg");
+	if(debug){$("#msg").show();}
+	if(!debug){$("#msg").hide();}
      
 	var clock = document.getElementById("clock");
 	var url = 1;
@@ -16,12 +20,16 @@ window.onload = function(){
 	if (time.isBetween(early, late)) { night = false }
 	
 	console.log("Night:"+night)
+	
+	msgdetail += "Initialized \n"
+	msg.innerHTML = msgdetail
 
 
-		/**
-	 * Randomize array element order in-place.
-	 * Using Durstenfeld shuffle algorithm.
-	 */
+
+		
+	 //Randomize array element order in-place.
+	 //Using Durstenfeld shuffle algorithm.
+	 
 	function shuffleArray(array) {
 		for (var i = array.length - 1; i > 0; i--) {
 			var j = Math.floor(Math.random() * (i + 1));
@@ -41,6 +49,8 @@ window.onload = function(){
 		lang:'nl',
 		uicCode:'8400390'
 		};
+		msgdetail += "initialized function departure\n"
+		msg.innerHTML = msgdetail
 		//console.log($.param(params))
 		$.ajax({
 			url: "https://gateway.apiportal.ns.nl/public-reisinformatie/api/v2/departures?" + $.param(params),
@@ -55,6 +65,8 @@ window.onload = function(){
 		})
 		.done(function(data) {
 			//alert("success");
+			msgdetail +=  "function departures success\n"
+			msg.innerHTML = msgdetail
 			console.log(data.payload.departures);
 			clock.innerHTML = moment(dateTimeNow).format("HH:mm")
 			i = 0;
@@ -137,17 +149,23 @@ window.onload = function(){
 		
 		
 		// show the data
-		$("#container").show();				
+		$("#container").show();	
+		if(debug==true){
+			$("#container").hide();				
+		}
 		$("#loading").hide();
-		
+
 		
 		})
-		.fail(function() {
+		.fail(function(xhr) {
 			//alert("error");
+			//console.log(xhr)
+
+			msgdetail += "Departures error:" + xhr.responseText+ "\n"
+			msg.innerHTML = msgdetail
 			console.log("Error");
 			// show the data
-			$("#container").show();				
-			$("#loading").hide();
+
 		
 			
 		});
@@ -160,6 +178,9 @@ window.onload = function(){
 	//get NS-data disruptions
 	$(function() {
 		//console.log($.param(params))
+		msgdetail += "function disruptions initialized \n"
+		msg.innerHTML =msgdetail
+		
 		$.ajax({
 			url: "https://gateway.apiportal.ns.nl/public-reisinformatie/api/v2/disruptions/station/8400390",
 			beforeSend: function(xhrObj){
@@ -172,6 +193,8 @@ window.onload = function(){
 		})
 		.done(function(data) {
 			//alert("success");
+			msgdetail += "function disruptions success \n"
+			msg.innerHTML = msgdetail
 			console.log(data.payload);
 			var delays = document.getElementById("delays");
 			data.payload.forEach(function loop(value,key) {
@@ -185,38 +208,50 @@ window.onload = function(){
 			
 			
 		})
-		.fail(function() {
-			//alert("error");
+		.fail(function(xhr) {
+			msgdetail += "Disruptions error:" + xhr.responseText+ "\n"
+			msg.innerHTML =msgdetail
 			console.log("Error");
+			
 		});
 		
 
 		
 	});
 	if(Math.floor(Math.random()*10) <=1){
-		url = 2
+		var url = 2
 		console.log("humor")
 	}
-	var feed = "feed.php?url="+url;
-	var divfeed = document.getElementById("feed");
-	var newsarray = [];
-	$.get(feed, function (data) {
-		$(data).find("item").each(function () { // or "item" or whatever suits your feed
-			var el = $(this);
-			//console.log(el);
-			newsarray.push(el.find("title").text());
+	function news(url) {
+		var feed = "feed.php?url="+url;
+		var divfeed = document.getElementById("feed");
+		var newsarray = [];
+		$.get(feed, function (data) {
+			if(data == null){
+				msgdetail += "news error:" + data+ "\n"
+				msg.innerHTML = msgdetail
+			}
+			//console.log(data);
+			$(data).find("item").each(function () { // or "item" or whatever suits your feed
+				var el = $(this);
+				//console.log(el);
+				newsarray.push(el.find("title").text());
+
+			});
+			msgdetail += "news success:" + data + "\n"
+			msg.innerHTML = msgdetail
+			newsarray = shuffleArray(newsarray);
+			var newsstring = newsarray.join("  |  ");
+			divfeed.innerHTML = newsstring; //newsarray
+			//console.log(newsarray);
+			//console.log(newsstring);
 
 		});
-		newsarray = shuffleArray(newsarray);
-		var newsstring = newsarray.join("  |  ");
-		divfeed.innerHTML = newsstring; //newsarray
-		//console.log(newsarray);
-		//console.log(newsstring);
-
-	});
-
+	}
+	/*
 	//BUIENRADAR <3 Tnx Thomas
      function request() {
+		msg.innerHTML = "function request started"
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = function() { 
             if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
@@ -380,8 +415,10 @@ window.onload = function(){
         return s;
     }
 
-    request();
+   request(); 
+   */
+   news();
 
 
-	
-}
+});
+

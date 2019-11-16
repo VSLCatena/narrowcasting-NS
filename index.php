@@ -10,20 +10,14 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" href="./style.css">
    
-    <script src="./apikey.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    </head>
+</head>
 
 <body id="background" class="bg-dark">
-
 	<div id="loading" class="text-center bg-white h2">
 		<span class="spinner-border"></span>
 		De trein met vertrektijden is iets vertraagd...
 	</div>
-
+	<textarea id="msg" class=" bg-white" style="display:none; height:80vh; width:400px;"></textarea>
 	<div id="container" class="container h2"  >
 		<div class="row" id="vertrektijdenbase">
 			<div  class="col-12">
@@ -86,12 +80,12 @@
 				</div>
 			</div>
 		</div>
-		<div class="row bg-dark" id="buienradarbase " >
+<!-- 		<div class="row bg-dark" id="buienradarbase " >
 			<div class="col-xs-12 rcorner">
 				<canvas id="buienradar"  style="padding:20px;">
 				</canvas>
 			</div>
-		</div>
+		</div> -->
 		<div class="row footer" id="footerbase" >
 			<div class="col-12 bg-light feedbase" id="feedbase">
 				<div class="feed text-dark" id="feed"></div>
@@ -100,5 +94,11 @@
 	</div>
 
 </body>
-	<script src="./functions.js"></script>
+	<script src="./apikey.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="http://www.klik48.local/git-narrowcasting-ns/functions.js"></script>
+	
 </html>
