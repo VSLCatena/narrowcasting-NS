@@ -13,6 +13,9 @@ if($_GET['url']=='2') {
 $content = file_get_contents( $feed_url );
 
 // Set the Content-Type header.
+header("Access-Control-Allow-Origin: http://narrowcasting-ns.vslcatena.lan/");
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header( 'Content-Type: application/rss+xml' );
 
 // Display the content and exit.

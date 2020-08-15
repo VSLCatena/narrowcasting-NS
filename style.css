@@ -43,6 +43,8 @@ body {
 
 #delays {
 	min-height:5vh;
+	max-height:40vh;
+	overflow:hidden;
 }
 
 #table {

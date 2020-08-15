@@ -53,8 +53,12 @@ $(window).ready(function() {
 		msg.innerHTML = msgdetail
 		//console.log($.param(params))
 		$.ajax({
-			url: "https://gateway.apiportal.ns.nl/public-reisinformatie/api/v2/departures?" + $.param(params),
-			//url: "https://gateway.apiportal.ns.nl/public-reisinformatie/api/v2/departures?dateTime=2019-09-07 22:02:00&maxJourneys=25&lang=nl&uicCode=8400390",
+			url: "https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/departures?" + $.param(params),
+       			headers: {
+ 	     			"accept": "application/json",
+  				"Access-Control-Allow-Origin":"http://narrowcasting-ns.vslcatena.lan"
+      	  		},
+			//url: "https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/departures?dateTime=2019-09-07 22:02:00&maxJourneys=25&lang=nl&uicCode=8400390",
 			beforeSend: function(xhrObj){
 				// Request headers
 				xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key",apikey);
@@ -182,7 +186,11 @@ $(window).ready(function() {
 		msg.innerHTML =msgdetail
 		
 		$.ajax({
-			url: "https://gateway.apiportal.ns.nl/public-reisinformatie/api/v2/disruptions/station/8400390",
+			url: "https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/disruptions/station/8400390",
+      			headers: {
+		          "accept": "application/json",
+		          "Access-Control-Allow-Origin":"http://narrowcasting-ns.vslcatena.lan"
+      	  		},
 			beforeSend: function(xhrObj){
 				// Request headers
 				xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key",apikey);
@@ -248,6 +256,8 @@ $(window).ready(function() {
 
 		});
 	}
+    news(url);
+
 	/*
 	//BUIENRADAR <3 Tnx Thomas
      function request() {
@@ -417,7 +427,6 @@ $(window).ready(function() {
 
    request(); 
    */
-   news();
 
 
 });
