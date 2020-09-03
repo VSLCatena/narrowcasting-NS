@@ -163,3 +163,8 @@ body {
 .li-nobullet {
 	list-style: none;
 }
+
+
+.buienradar-frame {
+	padding: 10px;
+}

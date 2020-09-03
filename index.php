@@ -18,8 +18,8 @@
 		De trein met vertrektijden is iets vertraagd...
 	</div>
 	<textarea id="msg" class=" bg-white" style="display:none; height:80vh; width:400px;"></textarea>
-	<div id="container" class="container h2"  >
-		<div class="row" id="vertrektijdenbase">
+	<div id="container" class="container"  >
+		<div class="row h2" id="vertrektijdenbase">
 			<div  class="col-12">
 				<div class="row bg-white rcorner" id="title">
 					<div class="col-1"><img src="NS_logo.png" alt="NS Logo" height="24" style="padding:5px"></img></div>
@@ -80,12 +80,11 @@
 				</div>
 			</div>
 		</div>
-<!-- 		<div class="row bg-dark" id="buienradarbase " >
-			<div class="col-xs-12 rcorner">
-				<canvas id="buienradar"  style="padding:20px;">
-				</canvas>
+		<div class="row bg-dark" id="buienradarbase">
+			<div class="col-xs-12 rcorner buienradar-frame">
+				<svg id="buienradar" class="buienradar"></svg>
 			</div>
-		</div> -->
+		</div>
 		<div class="row footer" id="footerbase" >
 			<div class="col-12 bg-light feedbase" id="feedbase">
 				<div class="feed text-dark" id="feed"></div>
@@ -100,5 +99,5 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="./functions.js"></script>
-	
+	<script src="./buienradar.js"></script>
 </html>
