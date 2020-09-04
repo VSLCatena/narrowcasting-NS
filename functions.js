@@ -45,7 +45,7 @@ $(window).ready(function() {
 	$(function() {
 		var params = {
 		dateTime:dateTimeNow,
-		maxJourneys:'7',
+		maxJourneys:'25',
 		lang:'nl',
 		uicCode:'8400390'
 		};
