@@ -59,6 +59,7 @@ body {
   bottom: 0px; */
  /*  height:3em; */
   min-width:90%;
+  margin-top: 8px;
 
 }
 .feed {
@@ -138,12 +139,13 @@ body {
   border-radius: 5px 5px 0px 0px;
 }
 
-.background-day {
+body.day {
 	background-image: url(background-day.jpg);
 	background-size: cover;
 	background-repeat:no-repeat;
 }
-.background-night {
+
+body.night {
 	background-image: url(background-night.jpg);
 	background-size: cover;
 	background-repeat:no-repeat;

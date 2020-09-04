@@ -80,7 +80,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row bg-dark" id="buienradarbase">
+		<div class="row" id="buienradarbase">
 			<div class="col-xs-12 rcorner buienradar-frame">
 				<svg id="buienradar" class="buienradar"></svg>
 			</div>

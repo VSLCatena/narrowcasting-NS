@@ -7,10 +7,17 @@ $(window).ready(() => {
     var bottomPart = 30;
     var viewBoxPadding = 2;
     var svgId = "buienradar";
-    
-    var mainBorderColor = '#777';
-    var subBorderColor = '#555';
-    var textColor = '#CCC';
+
+    var mainBorderColor = '#c4c4c4';
+    var subBorderColor = '#e7e7e7';
+    var textColor = '#152b81';
+    var precipitationColor = '#5A9BD3';
+
+    if ($("body").hasClass("night")) {
+        mainBorderColor = '#777';
+        subBorderColor = '#555';
+        textColor = '#CCC';
+    }
     // End Parameters
     
     
@@ -55,7 +62,7 @@ $(window).ready(() => {
     
         var polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
         polygon.setAttribute('points', path);
-        polygon.style.fill = '#5A9BD3';
+        polygon.style.fill = precipitationColor;
     
         svg.appendChild(polygon);
     
