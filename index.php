@@ -5,94 +5,79 @@
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" href="./style.css">
-   
 </head>
-
-<body id="background" class="bg-dark">
-	<div id="loading" class="text-center bg-white h2">
+<body>
+	<!-- Begin loading screen -->
+	<div id="loading" class="text-center bg-color dynamic-color">
 		<span class="spinner-border"></span>
 		De trein met vertrektijden is iets vertraagd...
 	</div>
-	<textarea id="msg" class=" bg-white" style="display:none; height:80vh; width:400px;"></textarea>
-	<div id="container" class="container"  >
-		<div class="row h2" id="vertrektijdenbase">
-			<div  class="col-12">
-				<div class="row bg-white rcorner" id="title">
-					<div class="col-1"><img src="NS_logo.png" alt="NS Logo" height="24" style="padding:5px"></img></div>
-					<div class="offset-1 col-2">Vertrektijden</div>
-					<div class="col-sm-8">Leiden Centraal</div>
-				</div>
-				<div class="row bg-darkblue rcorner" >
-					<div>&nbsp;</div>
-				</div>
-				<div class="row">&nbsp;</div>
-				<div class="row" >   
-					<div class="col-sm-3">
-						<div class="row bg-darkblue rcorner" id="clockbase">
-							<div class="col-4"><i class="far fa-clock text-white"></i></div>				
-							<div class="col-8"><div id="clock" class="text-white"></div></div>
-						</div>
-						<div class="row">&nbsp;</div>
-						<div class="row rcorner-b bg-nsyellow " id="title_delays">
-							<div class="col-3 "><i class="fas fa-exclamation-triangle"></i></div>
-							<div class="col-9 ">
-								<div  class="small">NS Wijzigingen en storingen</div>
-							</div>
-						</div>
-						<div class="row rcorner-t bg-white">
-							<div class="col-12 " >
-								<div id="delays" class=""></div>
-							</div>
-						</div>			
+	<!-- End loading screen -->
+	<div class="container">
+		<!-- Begin header -->
+		<div class="row pt-2">
+			<div class="col-12 bg-color dynamic-color rounded-top py-2">
+				<img src="NS_logo.png" alt="NS Logo" height="35"></img>
+				<span class="ml-5 h4">Vertrektijden vanaf Leiden Centraal</span>
+			</div>
+			<!-- Begin clock -->
+			<div class="col-12 clock-holder bg-darkblue rounded-bottom h3 p-1 pl-3">
+				<i class="far fa-clock text-white"></i>			
+				<span id="clock" class="text-white"></span>
+			</div>
+			<!-- End clock -->
+		</div>
+		<!-- End header -->
+		<div class="row mt-2">
+			<!-- Begin storingen -->
+			<div id="delays-holder" class="col-3 mr-3">
+				<div class="row">
+					<div class="col-12 bg-nsyellow rounded-top text-center h5 p-2 mb-0">
+						<i class="fas fa-exclamation-triangle mr-1"></i>
+						NS Wijzigingen en storingen
 					</div>
-					<div class="col-sm-9">
-						<div class="row ">
-							<div class="col-12 ">
-								<div id="table"  class="table rcorner" >
-									<table id="departures" class="table table-striped table-light" >
-										<thead class="bg-nsyellow Otext-black">
-										<tr>
-											<th>Vertrek</th>
-											<th>Bestemming</th>
-											<th>Spoor</th>
-											<th>Type</th>
-											<th>Lopen</th>
-										</tr>
-										</thead>
-										<tbody id="dept_body" class="">
-										<tr id="0">
-											<td id="0-time" class="dept-time"></td>
-											<td id="0-dest" class="dept-dest"></td>
-											<td id="0-track" class="dept-track"></td>
-											<td id="0-extra" class="dept-extra"></td>
-											<td id="0-walk" class="dept-walk"></td>
-										</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
+					<div id="delays" class="col-12 bg-color dynamic-color rounded-bottom"></div>
 				</div>
 			</div>
+			<!-- End storingen -->
+			<!-- Begin departure times -->
+			<div class="col px-0">
+				<table id="departures" class="table table-striped table-light">
+					<thead class="bg-nsyellow text-dark h4">
+						<tr>
+							<th>Vertrek</th>
+							<th>Bestemming</th>
+							<th>Spoor</th>
+							<th>Type</th>
+							<th>Lopen</th>
+						</tr>
+					</thead>
+					<tbody class="h5" id="dept_body">
+						<tr><td colspan="5"></td></tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- End departure times -->
 		</div>
-		<div class="row" id="buienradarbase">
-			<div class="col-xs-12 rcorner buienradar-frame">
-				<svg id="buienradar" class="buienradar"></svg>
+		<!-- Begin buienradar -->
+		<div class="row mt-2">
+			<div class="col bg-color rounded pt-3">
+				<svg id="buienradar"></svg>
 			</div>
 		</div>
-		<div class="row footer" id="footerbase" >
-			<div class="col-12 bg-light feedbase" id="feedbase">
-				<div class="feed text-dark" id="feed"></div>
+		<!-- End buienradar -->
+		<!-- Begin newsfeed -->
+		<footer class="row mt-2">
+			<div class="col bg-color rounded dynamic-color" id="feedbase">
+				<div id="feed"></div>
 			</div>
-		</div>
+		</footer>
+		<!-- End newsfeed -->
 	</div>
 
-</body>
 	<script src="./apikey.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
@@ -100,4 +85,5 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="./functions.js"></script>
 	<script src="./buienradar.js"></script>
+</body>
 </html>
