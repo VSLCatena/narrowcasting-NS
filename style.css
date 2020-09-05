@@ -51,6 +51,10 @@ body.night {
 	
 }
 
+#departures th, #departures td {
+	text-align: center;
+}
+
 #feedbase {
 	padding:5px 5px 5px 5px;
 	overflow: hidden;
