@@ -2,9 +2,9 @@
 $(window).ready(() => {
     var debug = true;
     var useRaw = true; // Raw is better
-    var width = 700;
-    var height = 120;
-    var bottomPart = 30;
+    var width = 910; // I found out that w=70,h=12,bp=3 is a good ratio
+    var height = 156;
+    var bottomPart = 39;
     var viewBoxPadding = 2;
     var svgId = "buienradar";
 
