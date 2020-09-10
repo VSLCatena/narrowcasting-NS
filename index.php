@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+	<!-- Begin debug field -->
+	<div id="debug" class="debug-field position-fixed w-100 h-100">
+		<div id="debugText" class="bg-color dynamic-color"></div>
+	</div>
+	<!-- End debug field -->
 	<!-- Begin loading screen -->
 	<div id="loading" class="text-center bg-color dynamic-color">
 		<span class="spinner-border"></span>

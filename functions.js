@@ -1,12 +1,30 @@
-$(window).ready(function() {
-	var debug = true;
+var debug = false;
 
+if (debug) {
+	document.getElementById("debug").style.display = "flex";
+
+	function hookDebugging(func) {
+		return function() {
+			func.apply(null, arguments);
+			document.getElementById("debugText").innerHTML += "<br />" + JSON.stringify(arguments);
+		}
+	}
+
+	/* Comment out any messages you don't want to display */
+	// console.debug = hookDebugging(console.debug);
+	console.info = hookDebugging(console.info);
+	console.log = hookDebugging(console.log);
+	console.warn = hookDebugging(console.warn);
+	console.error = hookDebugging(console.error);
+}
+
+$(window).ready(function() {
 	$("#clock").html(moment().format("HH:mm"));
 
 
 	// Code for day and night change
 	var night = !moment().isBetween(moment('6', 'H'), moment('22', 'H'));
-	console.log("Night:" + night);
+	console.log("Night mode:" + night);
 
 	// We add the day or night class to our body so we can use it in our
 	// css selectors to change the appearance
@@ -44,10 +62,8 @@ $(window).ready(function() {
 		$("#loading").hide();
 		$('.container').show();
 
-		if (debug) {
-			console.debug("AJAX departure call succesful");
-			console.log(data.payload.departures);
-		}
+		console.log("AJAX departure call succesful");
+		console.debug(data.payload.departures);
 
 		// Create a moment of 20 minutes from now
 		var twentyMinutesFromNow = moment().add(20, 'minutes');
@@ -107,8 +123,8 @@ $(window).ready(function() {
 		}
 	})
 	.fail(function(xhr) {
-		console.debug("Departures error: " + xhr.responseText);
-		console.debug(xhr);
+		console.log("Departures error: " + xhr.responseText);
+		console.info(xhr);
 	});
 		
 
@@ -128,10 +144,8 @@ $(window).ready(function() {
 		},
 	})
 	.done(function(data) {
-		if (debug) {
-			console.debug("Succesfully got NS disruptions");
-			console.debug(data);
-		}
+		console.log("Succesfully got NS disruptions");
+		console.debug(data);
 
 		// If the payload is empty we hide our disruptions element
 		if (data.payload.length <= 0) {
@@ -154,8 +168,8 @@ $(window).ready(function() {
 		
 	})
 	.fail(function(xhr) {
-		console.debug("Disruptions error: " + xhr.responseText);
-		console.debug(xhr);
+		console.log("Disruptions error: " + xhr.responseText);
+		console.info(xhr);
 	});
 	
 	
@@ -178,10 +192,8 @@ $(window).ready(function() {
 	var feed = "feed.php?url=" + (loadHumorInstead ? 2 : 1);
 	$.get(feed)
 	.then(function (data) {
-		if (debug) {
-			console.debug("News success");
-			console.debug(data);
-		}
+		console.log("News success");
+		console.debug(data);
 		
 		var newsarray = [];
 		$(data).find("item")
@@ -195,8 +207,8 @@ $(window).ready(function() {
 		$("#feed").html(newsarray.join("  |  "));
 	})
 	.fail(function(xhr) {
-		console.debug("News error: " + xhr.responseText);
-		console.debug(xhr);
+		console.log("News error: " + xhr.responseText);
+		console.info(xhr);
 	});
 
 });
