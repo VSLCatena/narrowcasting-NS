@@ -3,10 +3,14 @@ var debug = false;
 if (debug) {
 	document.getElementById("debug").style.display = "flex";
 
+	function addDebug() {
+		document.getElementById("debugText").innerHTML += "<br />" + JSON.stringify(arguments);
+	}
+
 	function hookDebugging(func) {
 		return function() {
 			func.apply(null, arguments);
-			document.getElementById("debugText").innerHTML += "<br />" + JSON.stringify(arguments);
+			addDebug(arguments);
 		}
 	}
 
@@ -16,6 +20,9 @@ if (debug) {
 	console.log = hookDebugging(console.log);
 	console.warn = hookDebugging(console.warn);
 	console.error = hookDebugging(console.error);
+	
+	window.addEventListener('error', function(e) { addDebug(e); });
+	window.addEventListener('unhandledrejection', function(e) { addDebug(e); });
 }
 
 $(window).ready(function() {
