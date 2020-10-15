@@ -55,7 +55,7 @@ header("Pragma: no-cache");
 					</div>
 				</div>
 				<div class="row">
-					<div id="delays" class="col-12 bg-color dynamic-color rounded-bottom"></div>
+					<div id="delays" class="col-12 bg-color dynamic-color py-2 rounded-bottom"></div>
 				</div>
 			</div>
 			<!-- End storingen -->
