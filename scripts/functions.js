@@ -4,12 +4,12 @@ if (debug) {
 	document.getElementById("debug").style.display = "flex";
 
 	function addDebug() {
-		document.getElementById("debugText").innerHTML += "<br />" + JSON.stringify(arguments);
+		document.getElementById("debugText").innerHTML += JSON.stringify(arguments) + "<br />";
 	}
 
 	function hookDebugging(func) {
 		return function() {
-			func.apply(null, arguments);
+			// func.apply(null, arguments);
 			addDebug(arguments);
 		}
 	}
@@ -89,21 +89,20 @@ $(window).ready(function() {
 			var time = actual.format('HH:mm');
 			// If the the planned departure time is different from the actual time, we show the difference
 			if (planned.diff(actual) != 0) {
-				time = `<del>${planned.format("HH:mm")}</del> <span class="text-danger">${time}</span>`
+				time = '<del>'+planned.format("HH:mm")+'</del> <span class="text-danger">'+time+'</span>';
 			}
 			
 			// When should we start walking from Catena?
 			var walk  = moment(departure.actualDateTime).subtract(20,"minutes").format("HH:mm");
 
 			// Here we create our table row
-			var newRowData = `
-				<tr>
-					<td>${time}</td>
-					<td>${departure.direction}</td>
-					<td>${departure.plannedTrack}</td>
-					<td>${departure.product.categoryCode}</td>
-					<td>${walk}</td>
-				</tr>`;
+			var newRowData = "<tr>" +
+                "<td>" + time + "</td>" +
+			    "<td>" + departure.direction + "</td>" +
+				"<td>" + departure.plannedTrack + "</td>" +
+				"<td>" + departure.product.categoryCode + "</td>" +
+				"<td>" + walk + "</td>" +
+				"</tr>";
 			
 			// And add it to the table
 			$('tbody').append(newRowData);
@@ -161,16 +160,16 @@ $(window).ready(function() {
 		}
 
 		// Go over each disruption and append it to the delays item
-		data.payload.forEach(function loop(item) {
-			var item = `
-				<ul>
-					<li><b>${item.titel}</b></li>
-					<li class="li-nobullet">${item.verstoring.oorzaak}</li>
-					<li class="li-nobullet">${item.verstoring.verwachting}</li>
-				</ul>`;
+    	for (var i = 0; i < data.payload.length; i++) {
+			var item = data.payload[i];
+			item = '<ul>' +
+					'<li><b>' + item.titel + '</b></li>' +
+					'<li class="li-nobullet">' + item.verstoring.oorzaak + '</li>' + 
+					'<li class="li-nobullet">' + item.verstoring.verwachting + '</li>' +
+				'</ul>';
 
 			$("#delays").append(item);
-		})
+		}
 		
 		
 	})

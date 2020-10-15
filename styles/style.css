@@ -1,0 +1,147 @@
+html, body {
+	height: 100%;
+	background-size: cover;
+	background-repeat:no-repeat;
+	background-color: #000;
+}
+
+body.day {
+	background-image: url(../images/background-day.jpg);
+}
+
+body.night {
+	background-image: url(../images/background-night.jpg);
+}
+
+.day .bg-color {
+	background-color: #f8f9fa;
+}
+
+.night .bg-color {
+	background-color: #343a40;
+}
+
+.day .table-striped tr:nth-of-type(2n+1) {
+	background-color: rgba(0,0,0,0.05);
+	color: #000;
+}
+
+.day .table-striped tr:nth-of-type(2n) {
+	background-color: transparent;
+	color: #000;
+}
+
+.day table {
+	background-color: transparent;
+}
+
+
+.day .dynamic-color {
+	color: #343a40;
+}
+
+.night .dynamic-color {
+	color: #FFF;
+}
+
+
+.bg-darkblue {
+	background-color: #000468!important
+	
+}
+
+.bg-nsyellow {
+	background-color: #f2c400!important
+}
+
+.container {
+	min-width:90%; 
+	margin-bottom:0;
+}
+
+#departures td {
+	padding: 0.25rem;
+	font-size: 2.0rem !important
+	
+}
+
+#departures th, #departures td {
+	text-align: center;
+}
+
+#departures th:nth-child(2), #departures td:nth-child(2) {
+	text-align: left !important;
+}
+
+#feedbase {
+	padding:5px 5px 5px 5px;
+	overflow: hidden;
+	position: relative;
+	height: 50px;
+}
+
+#feed {
+	white-space:nowrap;
+	position: absolute;
+	font-size: 28px;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	height: 100%;
+	margin: 0;
+	padding: 5px;
+	text-align: left;
+	/* Starting position */
+	-moz-transform:translateX(10%);
+	-webkit-transform:translateX(10%);	
+	transform:translateX(10%);
+	/* Apply animation to this element */	
+	-moz-animation: feedbase 100s linear infinite;
+	-webkit-animation: feedbase 100s linear infinite;
+	animation: feedbase 100s linear infinite;
+}
+
+/* Move it (define the animation) */
+@-moz-keyframes feedbase {
+	0%   { -moz-transform: translateX(10%); }
+	100% { -moz-transform: translateX(-100%); }
+}
+@-webkit-keyframes feedbase {
+	0%   { -webkit-transform: translateX(10%); }
+	100% { -webkit-transform: translateX(-100%); }
+}
+@keyframes feedbase {
+	0%   { 
+		-moz-transform: translateX(10%); /* Firefox bug fix */
+		-webkit-transform: translateX(10%); /* Firefox bug fix */
+		transform: translateX(10%); 		
+	}
+	100% { 
+		-moz-transform: translateX(-100%); /* Firefox bug fix */
+		-webkit-transform: translateX(-100); /* Firefox bug fix */
+		transform: translateX(-100%); 
+	}
+}
+
+
+
+.fontparty {
+	font-family:Comic Sans MS, cursive, sans-serif;
+}
+
+.li-nobullet {
+	list-style: none;
+}
+
+.debug-field {
+	z-index: 9999;
+	background-color: rgba(0, 0, 0, 0.8);
+	display: none;
+	justify-content: center;
+	align-items: center;
+}
+
+#debugText {
+	padding: 8px;
+	font-size: 30px;
+}
