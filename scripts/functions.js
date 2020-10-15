@@ -28,15 +28,6 @@ if (debug) {
 $(window).ready(function() {
 	$("#clock").html(moment().format("HH:mm"));
 
-
-	// Code for day and night change
-	var night = !moment().isBetween(moment('6', 'H'), moment('22', 'H'));
-	console.log("Night mode:" + night);
-
-	// We add the day or night class to our body so we can use it in our
-	// css selectors to change the appearance
-	$(document.body).addClass(night ? 'night' : 'day');
-
 	// The only thing we need to do manually is how the table looks.
 	$("#departures")
 		.removeClass("table-dark table-light")
