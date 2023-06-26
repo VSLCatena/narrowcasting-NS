@@ -1,0 +1,35 @@
+version: '3.8'
+
+x-name:
+ - &NAME narrowcasting-ns
+ - &NET nc-ns_net
+
+x-template: &default-template
+  environment:
+    TZ: Europe/Amsterdam
+  networks:
+    - net
+  restart: "unless-stopped"
+  container_name: *NAME
+  hostname: *NAME
+
+#Docker Networks
+networks:
+  net:
+    driver: bridge
+    ipam:
+     driver: default
+     config:
+       - subnet: 192.168.90.8/30 #(90.9.90.10)
+    driver_opts:
+      com.docker.network.bridge.name: *NET
+
+services:
+  *NAME:
+    <<: *default-template
+    image: php:8-apache-bullseye
+    ports:
+      - "7777:80/tcp"
+    volumes:
+      - ./html:/var/www/html
+
