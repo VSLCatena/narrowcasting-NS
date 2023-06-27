@@ -14,6 +14,24 @@ if (isset($_GET['bottomPadding'])) $settings['bottomPadding'] = intval($_GET['bo
 if (isset($_GET['textPadding'])) $settings['textPadding'] = intval($_GET['textPadding']);
 
 class BuienRadar {
+    public $width;   
+    public $height;   
+    public $bottomPart;   
+    public $darkMode;   
+    public $useRaw;   
+    public $debug;   
+    public $padding;   
+    public $borderSize;   
+    public $bottomPadding;
+    public $textSize;
+    public $textPadding;   
+    public $trueWidth;
+    public $trueHeight;
+    public $mainBorderColor;
+    public $subBorderColor;
+    public $textColor;
+    public $precipitationColor;
+    public $image;
     
     function __construct($settings = array()) {
         $this->width = 700;
