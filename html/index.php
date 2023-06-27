@@ -47,7 +47,7 @@ header("Pragma: no-cache");
 		<!-- End header -->
 		<div class="row d-flex flex-row">
 			<!-- Begin storingen -->
-			<div class="col-3 mr-3">
+			<div id="delays-holder" class="col-3 mr-3">
 				<div class="row">
 					<div class="col-12 bg-nsyellow rounded-top text-center text-dark h5 p-2 mb-0">
 						<i class="fas fa-exclamation-triangle mr-1"></i>
