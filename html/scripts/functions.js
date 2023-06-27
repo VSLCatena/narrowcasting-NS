@@ -46,14 +46,15 @@ $(window).ready(function() {
 
 	$.ajax({
 		type: "GET",
-		url: "https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/departures?" + $.param(params),
+		// url: "https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/departures?" + $.param(params),
+		url: "./ns_api.php?page=departures",
 		headers: {
 			"accept": "application/json",
 			"Access-Control-Allow-Origin":"http://narrowcasting-ns.vslcatena.lan"
 		},
-		beforeSend: function(xhrObj){
-			xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key",apikey);
-		}
+//		beforeSend: function(xhrObj){
+//			xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key",apikey);
+//		}
 	})
 	.done(function(data) {
 		// Hide the loading screen, and show the actual content
@@ -131,14 +132,16 @@ $(window).ready(function() {
 	//get NS-data disruptions
 	$.ajax({
 		type: "GET",
-		url: "https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/disruptions/station/8400390",
+        url: "./ns_api.php?page=disruptions",
+
+//		url: "https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/disruptions/station/8400390",
 		headers: {
 			"accept": "application/json",
 			"Access-Control-Allow-Origin":"http://narrowcasting-ns.vslcatena.lan"
 		},
-		beforeSend: function(xhrObj){
-			xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key",apikey);
-		},
+//		beforeSend: function(xhrObj){
+//			xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key",apikey);
+//		},
 	})
 	.done(function(data) {
 		console.log("Succesfully got NS disruptions");
