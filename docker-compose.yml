@@ -32,6 +32,5 @@ services:
     secrets:
       - NS_API_KEY
     environment:
-      - NS_API_KEY=/run/secrets/NS_API_KEY
       - NS_STATION_ID=8400390
 
