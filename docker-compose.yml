@@ -1,0 +1,37 @@
+x-template: &default-template
+  environment:
+    TZ: Europe/Amsterdam
+  networks:
+    - net
+  restart: "unless-stopped"
+
+#Docker Networks
+networks:
+  net:
+    driver: bridge
+    ipam:
+     driver: default
+     config:
+       - subnet: 192.168.90.8/29
+    driver_opts:
+      com.docker.network.bridge.name: ns_net
+
+secrets:
+  NS_API_KEY:
+      file: ./ns_api_key.txt
+      
+services:
+  ns.fpm:
+    <<: *default-template
+    image: ghcr.io/vslcatena/narrowcasting-ns:v3.0.1-alpine
+    build: ./src
+    container_name: ns.fpm
+    hostname: fpm
+    volumes:
+      - ./html/:/var/www/html/
+    secrets:
+      - NS_API_KEY
+    environment:
+      - NS_API_KEY=/run/secrets/NS_API_KEY
+      - NS_STATION_ID=8400390
+
