@@ -52,15 +52,16 @@ $(window).ready(function() {
 			"accept": "application/json",
 			"Access-Control-Allow-Origin":"http://narrowcasting-ns.vslcatena.lan"
 		},
-//		beforeSend: function(xhrObj){
-//			xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key",apikey);
-//		}
 	})
 	.done(function(data) {
 		// Hide the loading screen, and show the actual content
 		$("#loading").hide();
 		$('.container').show();
 
+
+    if (data.statusCode == '401') {
+        return;
+    }
 		console.log("AJAX departure call succesful");
 		console.debug(data.payload.departures);
 
@@ -133,19 +134,26 @@ $(window).ready(function() {
 	$.ajax({
 		type: "GET",
         url: "./ns_api.php?page=disruptions",
-
-//		url: "https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/disruptions/station/8400390",
 		headers: {
 			"accept": "application/json",
 			"Access-Control-Allow-Origin":"http://narrowcasting-ns.vslcatena.lan"
-		},
-//		beforeSend: function(xhrObj){
-//			xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key",apikey);
-//		},
+		}
 	})
 	.done(function(data) {
 		console.log("Succesfully got NS disruptions");
 		console.debug(data);
+
+		// if error then show it
+		if (data.statusCode == '401') {
+            var item = data;
+            item = '<ul>' +
+                   '<li><b>' + item.statusCode + '</b></li>' +
+                   '<li class="li-nobullet">' + item.message + '</li>' +
+                   '</ul>';
+           $("#delays").append(item);
+		    
+		    return;
+		}
 
 		// If the payload is empty we hide our disruptions element
 		if (data.payload.length <= 0) {
@@ -153,16 +161,15 @@ $(window).ready(function() {
 			return;
 		}
 
-		// Go over each disruption and append it to the delays item
-    	for (var i = 0; i < data.payload.length; i++) {
-			var item = data.payload[i];
-			item = '<ul>' +
-					'<li><b>' + item.titel + '</b></li>' +
-					'<li class="li-nobullet">' + item.verstoring.oorzaak + '</li>' + 
-					'<li class="li-nobullet">' + item.verstoring.verwachting + '</li>' +
-				'</ul>';
-
-			$("#delays").append(item);
+	   	// Go over each disruption and append it to the delays item
+       	for (var i = 0; i < data.payload.length; i++) {
+		    var item = data.payload[i];
+	    	item = '<ul>' +
+	   		    '<li><b>' + item.titel + '</b></li>' +
+        	    '<li class="li-nobullet">' + item.verstoring.oorzaak + '</li>' + 
+        	    '<li class="li-nobullet">' + item.verstoring.verwachting + '</li>' +
+                '</ul>';
+		    $("#delays").append(item);
 		}
 		
 		

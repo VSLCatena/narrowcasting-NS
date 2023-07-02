@@ -6,6 +6,7 @@ header('Content-Type: application/json; charset=utf-8');
     $opts = array(
     'http'=>array(
         'method'=>"GET",
+        'ignore_errors'=>"TRUE",
         'header'=>"Accept-language: en\r\n" .
         "Ocp-Apim-Subscription-Key:" . NS_API_KEY . "\r\n"
     )

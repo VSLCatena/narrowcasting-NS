@@ -14,6 +14,7 @@ if (isset($_GET['bottomPadding'])) $settings['bottomPadding'] = intval($_GET['bo
 if (isset($_GET['textPadding'])) $settings['textPadding'] = intval($_GET['textPadding']);
 
 class BuienRadar {
+    private $font;
     public $width;   
     public $height;   
     public $bottomPart;   
@@ -34,6 +35,7 @@ class BuienRadar {
     public $image;
     
     function __construct($settings = array()) {
+        $this->font = '/usr/share/ghostscript/Resource/CIDFSubst/DroidSansFallback.ttf';
         $this->width = 700;
         $this->height = 200;
         $this->bottomPart = 20;
@@ -141,6 +143,7 @@ class BuienRadar {
         $draw = new ImagickDraw();
         $draw->translate($this->padding, $this->padding);
         $draw->setStrokeColor($this->subBorderColor);
+        $draw->setFont($this->font);
         $draw->setFontSize($this->textSize);
         $draw->setStrokeWidth(2);
         
@@ -196,6 +199,7 @@ class BuienRadar {
         $draw = new ImagickDraw();
         $draw->translate($this->padding, $this->padding);
 
+        $draw->setFont($this->font);
         $draw->setTextAlignment(imagick::ALIGN_RIGHT);
         $draw->setFontSize($this->textSize);
         $draw->setFillColor($this->textColor);
