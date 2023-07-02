@@ -1,0 +1,27 @@
+
+x-template: &default-template
+  environment:
+    TZ: Europe/Amsterdam
+  networks:
+    - net
+  restart: "unless-stopped"
+
+services:
+  ns.apache:
+    <<: *default-template
+    container_name: ns.apache
+    hostname: apache
+    image: httpd:alpine
+    profiles:
+      - dev
+    volumes:
+      - ./dev_my-httpd-vhosts.conf:/usr/local/apache2/conf/extra/httpd-vhosts.conf
+      - ./dev_my-httpd.conf:/usr/local/apache2/conf/httpd.conf
+    volumes_from:
+      - ns.fpm:ro
+    networks:
+      - net      
+    ports:
+      - "7777:80/tcp"
+
+
