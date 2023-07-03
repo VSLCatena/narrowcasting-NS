@@ -23,7 +23,7 @@ secrets:
 services:
   ns.fpm:
     <<: *default-template
-    image: ghcr.io/vslcatena/narrowcasting-ns:v3.1.0-alpine
+    image: ghcr.io/vslcatena/narrowcasting-ns:v3.1.1-alpine
     build: ./src
     container_name: ns.fpm
     hostname: fpm
